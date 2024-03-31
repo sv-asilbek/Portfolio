@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div id="colorlib-main">
+        <section class="ftco-section ftco-no-pt ftco-no-pb">
+            <div class="container px-md-0">
+                <div class="row d-flex no-gutters">
+                    {% for obj in posts %}
+                        <div class="col-md-4 portfolio-wrap-2">
+                            <div class="row no-gutters align-items-center">
+                                <div class="img w-100 js-fullheight d-flex align-items-center"
+                                     style="background-image: url({{ obj.image.url }});">
+                                    <div class="text p-4 p-md-5 ftco-animate">
+                                        <div class="desc">
+                                            <div class="top">
+                                        <span class="subheading">
+                                            {% if obj.tag.all %}
+                                                {% for tag in obj.tag.all %}
+                                                    {{ tag.name }}
+                                                    {% if not forloop.last %}, {% endif %}
+                                                {% endfor %}
+                                            {% else %}
+                                                No Tags Available
+                                            {% endif %}
+                                        </span>
+                                                <h2 class="mb-4">
+                                                    <a href="{% url 'gallery_detail' obj.id %}">{{ obj.title }}</a>
+                                                </h2>
+                                                <p>
+                                                    <a href="{% url 'gallery_detail' obj.id %}" class="custom-btn">View
+                                                        Portfolio</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row d-flex">
+                    <div class="col-md-12">
+                        <a href="/" class="btn-custom-load d-block w-100 text-center py-4">LOAD MORE <span
+                                class="fa fa-refresh"></span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
